@@ -3,7 +3,7 @@ Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
 Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis
 Requires at least: 3.6
-Tested up to: 3.7.1
+Tested up to: 3.8
 Stable tag: 1.0.0
 License: GPLv3
 
@@ -71,10 +71,16 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.0.1 =
+* WordPress 3.8 compatibility checked.
+
 = 1.0.0 =
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+* WordPress 3.8 compatibility checked.
 
 = 1.0.0 =
 * This is the first public release.
