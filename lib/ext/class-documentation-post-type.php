@@ -94,7 +94,7 @@ class Documentation_Post_Type {
 				'publicly_queryable'  => true,
 				'query_var'           => true,
 				'rewrite'             => empty( $document_slug ) ? true : array( 'slug' => $document_slug ),
-				'show_in_nav_menus'   => false,
+				'show_in_nav_menus'   => true,
 				'show_ui'             => true,
 				'supports'            => $supports,
 				'taxonomies' => array( 'document_category', 'document_tag' )

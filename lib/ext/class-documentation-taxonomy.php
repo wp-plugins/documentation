@@ -48,8 +48,8 @@ class Documentation_Taxonomy {
 			array(
 				'hierarchical' => true,
 				'labels'       => array(
-					'name'              => _x( 'Categories', 'taxonomy general name', DOCUMENTATION_PLUGIN_DOMAIN ),
-					'singular_name'     => _x( 'Category', 'taxonomy singular name', DOCUMENTATION_PLUGIN_DOMAIN ),
+					'name'              => _x( 'Document Categories', 'taxonomy general name', DOCUMENTATION_PLUGIN_DOMAIN ),
+					'singular_name'     => _x( 'Document Category', 'taxonomy singular name', DOCUMENTATION_PLUGIN_DOMAIN ),
 					'search_items'      => __( 'Search Categories', DOCUMENTATION_PLUGIN_DOMAIN ),
 					'all_items'         => __( 'All Categories', DOCUMENTATION_PLUGIN_DOMAIN ),
 					'parent_item'       => __( 'Parent Category', DOCUMENTATION_PLUGIN_DOMAIN ),
@@ -65,9 +65,8 @@ class Documentation_Taxonomy {
 				'rewrite'      => array( 'slug' => 'document_category' ),
 				'show_in_nav_menus' => true,
 				'show_tagcloud'     => true,
-				'show_ui'           => true
-// 				,
-// 				'show_admin_column' => true
+				'show_ui'           => true,
+				'show_admin_column' => true
 			)
 		);
 
@@ -77,11 +76,12 @@ class Documentation_Taxonomy {
 			array(
 				'hierarchical' => false,
 				'query_var' => true,
-			'rewrite' => array( 'slug' => 'document_tag' ),
-			'public' => true,
-			'show_ui' => true,
-			'show_admin_column' => true,
-		) );
+				'rewrite' => array( 'slug' => 'document_tag' ),
+				'public' => true,
+				'show_ui' => true,
+				'show_admin_column' => true,
+			)
+		);
 	}
 
 }
