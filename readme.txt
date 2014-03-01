@@ -84,6 +84,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Upgrade Notice ==
 
+= 1.0.2 =
+* Added several improvements for document categories display and menus.
+
 = 1.0.1 =
 * WordPress 3.8 compatibility checked.
 
