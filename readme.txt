@@ -3,7 +3,7 @@ Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
 Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis
 Requires at least: 3.6
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: 1.0.2
 License: GPLv3
 
@@ -71,6 +71,10 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.0.3 =
+* WordPress 3.9 compatibility checked
+* Translation template added
+
 = 1.0.2 =
 * Improvement: Documents are available under Appearance > Menus so that documents can be added directly to menus.
 * Improvement: Changed the basic labels of document categories to distinguish them from post categories, especially for the Menus.
@@ -83,6 +87,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.0.3 =
+* WordPress 3.9 compatibility checked and translation template added.
 
 = 1.0.2 =
 * Added several improvements for document categories display and menus.
