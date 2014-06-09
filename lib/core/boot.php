@@ -31,25 +31,15 @@ class Documentation_Controller {
 		require_once( DOCUMENTATION_CORE_LIB . '/class-documentation.php' );
 		require_once( DOCUMENTATION_EXT_LIB . '/class-documentation-post-type.php' );
 		require_once( DOCUMENTATION_EXT_LIB . '/class-documentation-taxonomy.php' );
-		
-		// @todo
 		if ( !is_admin() ) {
 			require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-shortcodes.php' );
 		} else {
 			require_once( DOCUMENTATION_ADMIN_LIB . '/class-documentation-settings.php' );
 		}
-		
-		
-		// @todo
 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-documents-widget.php' );
 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-document-children-widget.php' );
 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-document-hierarchy-widget.php' );
-// 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-tags-widget.php' );
-// 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-search-widget.php' );
-// 		require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-topics-widget.php' );
-// 		if ( !is_admin() ) {
-// 			require_once( DOCUMENTATION_VIEWS_LIB . '/class-documentation-templates.php' );
-// 		}
+		require_once( DOCUMENTATION_CORE_LIB . '/class-documentation-search.php' );
 	}
 
 	/**

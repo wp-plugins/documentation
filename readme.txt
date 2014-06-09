@@ -3,7 +3,7 @@ Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
 Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis
 Requires at least: 3.6
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: 1.0.3
 License: GPLv3
 
@@ -71,6 +71,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.1.0 =
+* Added the [documentation_search_form] shortcode which provides a dynamic document search form.
+
 = 1.0.3 =
 * WordPress 3.9 compatibility checked
 * Translation template added
@@ -87,6 +90,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+* Adds the new [documentation_search_form] shortcode which provides a dynamic search form.
 
 = 1.0.3 =
 * WordPress 3.9 compatibility checked and translation template added.
