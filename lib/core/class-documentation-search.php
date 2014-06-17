@@ -32,6 +32,8 @@ class Documentation_Search {
 	const TITLE         = 'title';
 	const EXCERPT       = 'excerpt';
 	const CONTENT       = 'content';
+	const ORDER         = 'order';
+	const ORDER_BY      = 'order_by';
 
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'wp_init' ) );
@@ -58,11 +60,30 @@ class Documentation_Search {
 
 			global $wpdb;
 
-			$title       = !empty( $_REQUEST[self::TITLE] ) ? intval( $_REQUEST[self::TITLE] ) > 0 : true;
-			$excerpt     = !empty( $_REQUEST[self::EXCERPT] ) ? intval( $_REQUEST[self::EXCERPT] ) > 0 : false;
-			$content     = !empty( $_REQUEST[self::CONTENT] ) ? intval( $_REQUEST[self::CONTENT] ) > 0 : false;
-			$limit       = !empty( $_REQUEST[self::LIMIT] ) ? intval( $_REQUEST[self::LIMIT] ) : self::DEFAULT_LIMIT;
+			$title       = isset( $_REQUEST[self::TITLE] ) ? intval( $_REQUEST[self::TITLE] ) > 0 : true;
+			$excerpt     = isset( $_REQUEST[self::EXCERPT] ) ? intval( $_REQUEST[self::EXCERPT] ) > 0 : false;
+			$content     = isset( $_REQUEST[self::CONTENT] ) ? intval( $_REQUEST[self::CONTENT] ) > 0 : false;
+			$limit       = isset( $_REQUEST[self::LIMIT] ) ? intval( $_REQUEST[self::LIMIT] ) : self::DEFAULT_LIMIT;
 			$numberposts = intval( apply_filters( 'documentation_search_limit', $limit ) );
+
+			$order       = isset( $_REQUEST[self::ORDER] ) ? strtoupper( trim( $_REQUEST[self::ORDER] ) ) : 'DESC';
+			switch( $order ) {
+				case 'DESC' :
+				case 'ASC' :
+					break;
+				default :
+					$order = 'ASC';
+			}
+			$order_by    = isset( $_REQUEST[self::ORDER_BY] ) ? strtolower( trim( $_REQUEST[self::ORDER_BY] ) ) : 'date';
+			switch( $order_by ) {
+				case 'date' :
+				case 'title' :
+				case 'ID' :
+				case 'rand' :
+					break;
+				default :
+					$order_by = 'title';
+			}
 
 			if ( !$title && !$excerpt && !$content ) {
 				$title = true;
@@ -112,17 +133,23 @@ class Documentation_Search {
 					'post_type' => 'document',
 					'post_status' => 'publish',
 					'include' => $include,
-					'numberposts' => $numberposts
+					'numberposts' => $numberposts,
+					'order' => $order,
+					'orderby' => $order_by
 				) );
+				$i = 0;
 				foreach( $posts as $post ) {
 					$post_ids[] = $post->ID;
 
 					$results[$post->ID] = array(
 						'id'    => $post->ID,
 						'url'   => get_permalink( $post->ID ),
-						'title' => get_the_title( $post )
+						'title' => get_the_title( $post ),
+						'i'     => $i
 					);
+					$i++;
 				}
+				usort( $results, array( __CLASS__, 'usort' ) );
 			}
 
 			echo json_encode( $results );
@@ -131,15 +158,60 @@ class Documentation_Search {
 	}
 
 	/**
+	 * Sort helper using the i index.
+	 * 
+	 * @param array $e1
+	 * @param array $e2
+	 * @return int
+	 */
+	public static function usort( $e1, $e2 ) {
+		return $e1['i'] - $e2['i'];
+	}
+
+	/**
 	 * Shortcode handler, renders a documentation search form.
 	 * 
 	 * Enqueues required scripts and styles.
 	 * 
-	 * @param array $args none accepted
+	 * @param array $atts order, order_by, title, excerpt, content, limit
 	 * @param array $content not used
 	 * @return string form HTML
 	 */
-	public static function documentation_search_form( $args = array(), $content = '' ) {
+	public static function documentation_search_form( $atts = array(), $content = '' ) {
+
+		$atts = shortcode_atts(
+			array(
+				'order'    => null,
+				'order_by' => null,
+				'title'    => null,
+				'excerpt'  => null,
+				'content'  => null,
+				'limit'    => null
+			),
+			$atts
+		);
+
+		$url_params = array();
+		foreach( $atts as $key => $value ) {
+			if ( $value !== null ) {
+				$value = strip_tags( trim( $value ) );
+				switch( $key ) {
+					case 'order' :
+					case 'order_by' :
+						break;
+					case 'title' :
+					case 'excerpt' :
+					case 'content' :
+						$value = strtolower( $value );
+						$value = $value == 'true' || $value == 'yes' || $value == '1';
+						break;
+					case 'limit' :
+						$value = intval( $value );
+						break;
+				}
+				$url_params[$key] = urlencode( $value );
+			}
+		}
 
 		wp_enqueue_script( 'typewatch' );
 		wp_enqueue_script( 'document-search' );
@@ -186,7 +258,7 @@ class Documentation_Search {
 			esc_attr( $field_id ), // jQuery selector for the input field passed to documentationSearch()
 			esc_attr( $search_id ), // container selector
 			esc_attr( $search_id . ' div.documentation-search-results' ), // results container selector
-			esc_js( admin_url( 'admin-ajax.php' ) ) // post target URL
+			add_query_arg( $url_params, admin_url( 'admin-ajax.php' ) ) // post target URL
 		);
 		$output .= '});'; // ready
 		$output .= '}'; // if

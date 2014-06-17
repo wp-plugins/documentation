@@ -1,7 +1,7 @@
 === Documentation ===
 Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
-Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis
+Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis, woocommerce
 Requires at least: 3.6
 Tested up to: 3.9.1
 Stable tag: 1.1.0
@@ -17,6 +17,8 @@ Leveraging WordPress' framework and internal structures, the system provides a c
 Documents are complemented by their dedicated document categories and document tags, which allows to keep the documentation structures separate from the more blog-oriented posts or CMS-like pages.
 It can be used to build a dedicated documentation site, a subsite for documentation in a multisite network or other creative deployments.
 
+Documents can be attached to products in WooCommerce using [WooCommerce Documentation](http://www.itthinx.com/plugins/woocommerce-documentation/).
+
 ### Widgets ###
 
 The plugin provides several widgets that are used to display document links:
@@ -31,6 +33,7 @@ The following shortcodes are available:
 
 - [documentation_hierarchy]
 - [documentation_list_children]
+- [documentation_search_form]
 
 Please refer to the documentation pages for details.
 
@@ -71,6 +74,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.2.0 =
+* Added support for search options to the [documentation_search_form] shortcode.
+
 = 1.1.0 =
 * Added the [documentation_search_form] shortcode which provides a dynamic document search form.
 
@@ -90,6 +96,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+* Added support for search options to the [documentation_search_form] shortcode.
 
 = 1.1.0 =
 * Adds the new [documentation_search_form] shortcode which provides a dynamic search form.
