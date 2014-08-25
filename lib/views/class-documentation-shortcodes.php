@@ -25,11 +25,22 @@
 class Documentation_Shortcodes {
 
 	/**
-	 * Not much to do here for now.
+	 * Registers shortcode handlers.
 	 */
 	public static function init() {
+		add_shortcode( 'documentation_documents', array( __CLASS__, 'documentation_documents' ) );
 		add_shortcode( 'documentation_list_children', array( __CLASS__, 'documentation_list_children' ) );
 		add_shortcode( 'documentation_hierarchy', array( __CLASS__, 'documentation_hierarchy' ) );
+	}
+
+	/**
+	 * 
+	 * @param array $atts
+	 * @param string $content
+	 */
+	public static function documentation_documents( $atts, $content = null ) {
+		require_once DOCUMENTATION_VIEWS_LIB . '/class-documentation-renderer.php';
+		return Documentation_Renderer::documents( $atts );
 	}
 
 	/**

@@ -30,6 +30,157 @@ class Documentation_Renderer {
 	public static function init() {
 	}
 
+	public static function documents( $atts = array() ) {
+
+		if ( !is_array( $atts ) ) {
+			$atts = array();
+		}
+
+		$atts = shortcode_atts(
+			array(
+				'category_id' => null,
+				'number'             => -1, // unlimited
+				'order'              => 'ASC',
+				'orderby'            => 'title',
+				'show_author'        => 'no',
+				'show_comment_count' => 'no',
+				'show_date'          => 'no'
+			),
+			$atts
+		);
+		
+		foreach( $atts as $key => $value ) {
+			switch( $key ) {
+				case 'category_id' :
+					if ( $value != '[current]' && $value != '{current}' ) {
+						$value = implode( ',', array_map( 'intval', explode( ',', $value ) ) );
+					}
+					break;
+				case 'number' :
+					$value = intval( $value );
+					if ( $value <= 0 ) {
+						$value = -1;
+					}
+					break;
+				case 'order' :
+					$value = strtoupper( $value );
+					switch( $value ) {
+						case 'ASC' :
+						case 'DESC' :
+							break;
+						default :
+							$value = null;
+					}
+					break;
+				case 'orderby' :
+					$value = strtolower( $value );
+					switch( $value ) {
+						case 'name' :
+						case 'author' :
+						case 'date' :
+						case 'title' :
+						case 'modified' :
+						case 'menu_order' :
+						case 'parent' :
+						case 'id' :
+						case 'rand' :
+						case 'comment_count' :
+							break;
+						default :
+							$value = 'title';
+					}
+					break;
+				case 'show_author' :
+				case 'show_comment_count' :
+				case 'show_date' :
+					$value = strtolower( $value );
+					$value = $value == 'true' || $value == 'yes' || $value == '1';
+					break;
+				default :
+					$value = null;
+			}
+			if ( $value !== null ) {
+				$atts[$key] = $value;
+			} else {
+				unset( $atts[$key] );
+			}
+		}
+
+		$args = array_merge( $atts, array( 'post_type' => 'document' ) );
+
+		if ( isset( $args['number'] ) ) {
+			$args['numberposts'] = $args['number'];
+			unset( $args['number'] );
+		}
+
+		$show_author = isset( $args['show_author'] ) && $args['show_author'];
+		unset( $args['show_author'] );
+
+		$show_date = isset( $args['show_date'] ) && $args['show_date'];
+		unset( $args['show_date'] );
+
+		$show_comment_count = isset( $args['show_comment_count'] ) && $args['show_comment_count'];
+		unset( $args['show_comment_count'] );
+
+		// dumb but post_title won't work
+		if ( isset( $args['orderby'] ) && ( $args['orderby'] == 'post_title' ) ) {
+			$args['orderby'] = 'title';
+		}
+
+		if ( !empty( $args['category_id'] ) ) {
+			if ( ( $args['category_id'] == '[current]' ) || $args['category_id'] == '{current}' ) {
+				$category_id = null;
+				global $wp_query;
+				if ( $o = $wp_query->get_queried_object() ) {
+					if ( isset( $o->taxonomy ) && ( $o->taxonomy == 'document_category' ) ) {
+						$category_id = $o->term_id;
+					}
+				}
+			} else {
+				$category_id = $args['category_id'];
+			}
+			if ( $category_id ) {
+				$args['tax_query'] = array(
+					array(
+						'taxonomy'         => 'document_category',
+						'field'            => 'id',
+						'terms'            => $category_id,
+						'include_children' => false
+					)
+				);
+			}
+			unset( $args['category_id'] );
+		}
+
+		$output = '';
+		$documents = get_posts( $args ); 
+		if ( count( $documents ) > 0 ) {
+			$output .= '<ul>';
+			foreach( $documents as $document ) {
+				$author = '';
+				if ( $show_author ) {
+					$author = ' ' . sprintf( '<span class="author">by %s</span>', get_the_author_meta( 'display_name', $document->post_author ) );
+				}
+				$date = '';
+				if ( $show_date ) {
+					$date = sprintf(
+						', <span class="date">%s</span>',
+						mysql2date( get_option('date_format'), $document->post_date )
+					);
+				}
+				$comment_count = '';
+				if ( $show_comment_count ) {
+					$comment_count = ', ' . '<span class="comment_count">' . sprintf( _n( '1 reply', '%d replies', $document->comment_count ), $document->comment_count ) . '</span>';
+				}
+				$output .= sprintf( '<li><a href="%s">%s</a>%s%s%s</li>', get_permalink( $document->ID ), wp_strip_all_tags( $document->post_title ), $author, $date, $comment_count );
+			}
+			$output .= '</ul>';
+		} else {
+			$output .= __( 'There are no documents.', DOCUMENTATION_PLUGIN_DOMAIN );
+		}
+		return $output;
+	}
+
 	/**
 	 * List children.
 	 * 
@@ -41,6 +192,10 @@ class Documentation_Renderer {
 	 * @link http://codex.wordpress.org/Function_Reference/wp_list_pages
 	 */
 	public static function list_children( $atts = array() ) {
+
+		if ( !is_array( $atts ) ) {
+			$atts = array();
+		}
 
 		$atts['echo']      = false;
 		if ( !isset( $atts['title_li'] ) ) {
