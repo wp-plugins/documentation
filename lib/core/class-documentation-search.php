@@ -89,9 +89,13 @@ class Documentation_Search {
 				$title = true;
 			}
 
-			// We are using prepare, just apply like_escape ...
-			$like = '%' . like_escape( $_REQUEST[self::SEARCH_QUERY] ) . '%';
-			// ... otherwise (if not using prepare) we must:
+			// We are using prepare, just apply esc_like ...
+			if ( method_exists( $wpdb, 'esc_like' ) ) {
+				$like = '%' . $wpdb::esc_like( $_REQUEST[self::SEARCH_QUERY] ) . '%';
+			} else {
+				$like = '%' . like_escape( $_REQUEST[self::SEARCH_QUERY] ) . '%';
+			}
+			// ... otherwise (if not using prepare) we must also esc_sql:
 			// $like = '%' . esc_sql( like_escape( $_REQUEST[self::SEARCH_QUERY] ) ) . '%';
 
 			$args   = array();
