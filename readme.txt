@@ -76,6 +76,7 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 = 1.3.0 =
 * Adjusted for WordPress 4.0 compatibility.
+* Added [documentation_documents] shortcode.
 
 = 1.2.0 =
 * Added support for search options to the [documentation_search_form] shortcode.
@@ -101,7 +102,7 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 == Upgrade Notice ==
 
 = 1.3.0 =
-* WordPress 4.0 compatible.
+* WordPress 4.0 compatible and new [documentation_documents] shortcode added.
 
 = 1.2.0 =
 * Added support for search options to the [documentation_search_form] shortcode.
