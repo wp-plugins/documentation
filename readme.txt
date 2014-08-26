@@ -34,6 +34,7 @@ The following shortcodes are available:
 - [documentation_hierarchy]
 - [documentation_list_children]
 - [documentation_search_form]
+- [documentation_documents]
 
 Please refer to the documentation pages for details.
 
@@ -74,6 +75,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.3.1 =
+* Fixed static call to class method.
+
 = 1.3.0 =
 * Adjusted for WordPress 4.0 compatibility.
 * Added [documentation_documents] shortcode.
@@ -100,6 +104,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+* Fixed a code issue.
 
 = 1.3.0 =
 * WordPress 4.0 compatible and new [documentation_documents] shortcode added.

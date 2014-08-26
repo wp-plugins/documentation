@@ -91,7 +91,7 @@ class Documentation_Search {
 
 			// We are using prepare, just apply esc_like ...
 			if ( method_exists( $wpdb, 'esc_like' ) ) {
-				$like = '%' . $wpdb::esc_like( $_REQUEST[self::SEARCH_QUERY] ) . '%';
+				$like = '%' . $wpdb->esc_like( $_REQUEST[self::SEARCH_QUERY] ) . '%';
 			} else {
 				$like = '%' . like_escape( $_REQUEST[self::SEARCH_QUERY] ) . '%';
 			}
