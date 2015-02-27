@@ -20,9 +20,11 @@
  */
 
 /**
- * Topic post type.
+ * Documentation post type.
  */
 class Documentation_Post_Type {
+
+	const THE_CONTENT_FILTER_PRIORITY = 0;
 
 	/**
 	 * Sets up the init hook.
@@ -32,6 +34,7 @@ class Documentation_Post_Type {
 		//add_action( 'save_post', array( __CLASS__, 'save_post' ), 10, 2 );
 		add_filter( 'comments_open', array( __CLASS__, 'comments_open' ), 10, 2 );
 		//add_action( 'comment_form_comments_closed', array( __CLASS__, 'comment_form_comments_closed' ) );
+		add_filter( 'the_content', array( __CLASS__, 'the_content' ), apply_filters( 'documentation_the_content_filter_priority', self::THE_CONTENT_FILTER_PRIORITY ) );
 	}
 
 	/**
@@ -159,6 +162,28 @@ class Documentation_Post_Type {
 	 * Currently not used.
 	 */
 	public static function comment_form_comments_closed() {
+	}
+
+	/**
+	 * Replacements to allow showing shortcodes within [[]] even though the
+	 * shortcode does not exist.
+	 * "[[" is replaced by "&#91;" and "]]" is replaced by "&#93;".
+	 *
+	 * @param string $content
+	 * @return string
+	 */
+	public static function the_content( $content ) {
+		if ( $post_type = get_post_type() ) {
+			if ( $post_type == 'document' ) {
+				if ( apply_filters( 'documentation_filter_the_content', true ) ) {
+					// WordPress' content_save_pre and excerpt_save_pre filters already apply wp_filter_post_kses().
+					// We only do our replacements to avoid the doubles appearing in documents.
+					$content = str_replace( '[[', '&#91;', $content );
+					$content = str_replace( ']]', '&#93;', $content );
+				}
+			}
+		}
+		return $content;
 	}
 }
 Documentation_Post_Type::init();

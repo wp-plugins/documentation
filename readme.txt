@@ -3,7 +3,7 @@ Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
 Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis, woocommerce
 Requires at least: 3.6
-Tested up to: 4.0
+Tested up to: 4.1.1
 Stable tag: 1.3.1
 License: GPLv3
 
@@ -75,6 +75,12 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.3.2 =
+* Fixed missing ul tags in the document hierarchy renderer.
+* Added a content filter to recognize escaped shortcodes in documents, so that
+  these can appear and be rendered without the double [[ ]]. WordPress will
+  render them with double brackets if the shortcode doesn't exist.
+
 = 1.3.1 =
 * Fixed static call to class method.
 
@@ -104,6 +110,9 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 * This is the first public release.
 
 == Upgrade Notice ==
+
+= 1.3.2 =
+* Fixes a rendering issue in document hierarchies and improves escaped shortcodes rendered in documents.
 
 = 1.3.1 =
 * Fixed a code issue.

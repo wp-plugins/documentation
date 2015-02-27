@@ -317,6 +317,7 @@ class Documentation_Renderer {
 
 		return
 			'<div class="documentation-hierarchy">' .
+			'<ul>' .
 			self::list_documents( array(
 				'echo'      => false,
 				'include'   => $nodes,
@@ -324,6 +325,7 @@ class Documentation_Renderer {
 				'title_li'  => '',
 				'walker'    => new Documentation_Walker_Document()
 			) ) .
+			'</ul>' .
 			'</div>'; // .documentation-hierarchy
 
 	}
