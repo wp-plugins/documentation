@@ -2,7 +2,7 @@
 /**
  * documentation.php
  *
- * Copyright (c) 2013 "kento" Karim Rahimpur www.itthinx.com
+ * Copyright (c) 2013 - 2015 "kento" Karim Rahimpur www.itthinx.com
  *
  * This code is released under the GNU General Public License.
  * See COPYRIGHT.txt and LICENSE.txt.
@@ -21,13 +21,13 @@
  * Plugin Name: Documentation
  * Plugin URI: http://www.itthinx.com/plugins/documentation
  * Description: A documentation management system.
- * Version: 1.3.2
+ * Version: 1.3.3
  * Author: itthinx
  * Author URI: http://www.itthinx.com
  * Donate-Link: http://www.itthinx.com
  * License: GPLv3
  */
-define( 'DOCUMENTATION_CORE_VERSION', '1.3.2' );
+define( 'DOCUMENTATION_CORE_VERSION', '1.3.3' );
 define( 'DOCUMENTATION_PLUGIN_FILE', __FILE__ );
 define( 'DOCUMENTATION_PLUGIN_DOMAIN', 'documentation' );
 define( 'DOCUMENTATION_PLUGIN_URL', plugin_dir_url( DOCUMENTATION_PLUGIN_FILE ) );

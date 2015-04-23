@@ -38,12 +38,26 @@
 	padding: 1em;
 	margin: 1em;
 }
-.separator {
+.documentation-settings-info {
+	margin: 1em 1em 0 0;
+	padding: 1em;
+	background-color: #a46497;
+	border-radius: 4px;
+	color: #fff;
+}
+.documentation-settings-info a {
+	color: #3c3c3c;
+	font-weight: bold;
+}
+.documentation-settings-info a:hover {
+	color: #1c1c1c;
+}
+.documentation-settings .separator {
 	border-bottom: 1px solid #fcfcfc;
 	height: 0px;
 	margin: 0.6em 1em 0.6em 0;
 }
-.separator.strong {
+.documentation-settings .separator.strong {
 	border-top: 1px solid #fcfcfc;
 	border-bottom: 1px solid #e0e0e0;
 	margin-top: 1em;

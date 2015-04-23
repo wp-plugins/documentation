@@ -76,13 +76,16 @@ class Documentation_Settings {
 		if ( !current_user_can( self::$capability ) ) {
 			wp_die( __( 'Access denied.', DOCUMENTATION_PLUGIN_DOMAIN ) );
 		}
-		echo
-			'<h2>' .
-			__( 'Settings', DOCUMENTATION_PLUGIN_DOMAIN ) .
-			'</h2>';
+		echo '<h2>';
+		echo __( 'Settings', DOCUMENTATION_PLUGIN_DOMAIN );
+		echo '</h2>';
 		echo '<div class="documentation-settings">';
 		include_once DOCUMENTATION_ADMIN_LIB . '/settings.php';
 		echo '</div>'; // .documentation-settings
+
+		echo '<div class="documentation-settings-info">';
+		echo __( 'Documents can be attached to products in WooCommerce using the <a href="http://www.itthinx.com/shop/woocommerce-documentation/">WooCommerce Documentation</a> extension.', DOCUMENTATION_PLUGIN_DOMAIN );
+		echo '</div>'; // .documentation-settings-info
 	}
 
 	/**

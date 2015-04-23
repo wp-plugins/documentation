@@ -2,9 +2,9 @@
 Contributors: itthinx
 Donate link: http://www.itthinx.com/plugins/documentation
 Tags: doc, docs, document, documents, documentation, manual, manuals, platform, system, wiki, wikis, woocommerce
-Requires at least: 3.6
-Tested up to: 4.1.1
-Stable tag: 1.3.2
+Requires at least: 4.0
+Tested up to: 4.2
+Stable tag: 1.3.3
 License: GPLv3
 
 A documentation management system.
@@ -75,6 +75,11 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Changelog ==
 
+= 1.3.3 =
+* Tested for WordPress 4.2.
+* Fixed separators in Settings affecting the admin sidebar's separators.
+* Added an info section in Settings.
+
 = 1.3.2 =
 * Fixed missing ul tags in the document hierarchy renderer.
 * Added a content filter to recognize escaped shortcodes in documents, so that
@@ -111,29 +116,5 @@ The documentation pages are [here](http://www.itthinx.com/documentation/document
 
 == Upgrade Notice ==
 
-= 1.3.2 =
-* Fixes a rendering issue in document hierarchies and improves escaped shortcodes rendered in documents.
-
-= 1.3.1 =
-* Fixed a code issue.
-
-= 1.3.0 =
-* WordPress 4.0 compatible and new [documentation_documents] shortcode added.
-
-= 1.2.0 =
-* Added support for search options to the [documentation_search_form] shortcode.
-
-= 1.1.0 =
-* Adds the new [documentation_search_form] shortcode which provides a dynamic search form.
-
-= 1.0.3 =
-* WordPress 3.9 compatibility checked and translation template added.
-
-= 1.0.2 =
-* Added several improvements for document categories display and menus.
-
-= 1.0.1 =
-* WordPress 3.8 compatibility checked.
-
-= 1.0.0 =
-* This is the first public release.
+= 1.3.3 =
+* Tested for WordPress 4.2 and fixed separators in Settings affecting the admin sidebar's separators.

@@ -18,9 +18,7 @@
  * @package documentation 1.0.0
  * @since documentation 1.0.0
  */
-?>
 
-<?php
 if ( !current_user_can( Documentation_Settings::$capability ) ) {
 	wp_die( __( 'Access denied.', DOCUMENTATION_PLUGIN_DOMAIN ) );
 }
@@ -45,36 +43,27 @@ if ( isset( $_POST['action'] ) && ( $_POST['action'] == 'set' ) && wp_verify_non
 $options = Documentation::get_options();
 $document_comments_open = isset( $options['document_comments_open'] ) ? $options['document_comments_open'] : true;
 $document_slug = !empty( $options['document_slug'] ) ? $options['document_slug'] : '';
-?>
 
-<div class="settings">
-<form name="settings" method="post" action="">
-<div>
-<?php
-// echo '<div class="buttons">';
-// printf( '<input class="import button" type="submit" name="submit" value="%s" />', esc_attr( echo __( 'Save', DOCUMENTATION_PLUGIN_DOMAIN ) ) ); 
-// echo '</div>'; // .buttons
-?>
+echo '<div class="settings">';
+echo '<form name="settings" method="post" action="">';
+echo '<div>';
 
-<label>
-<?php
-	printf( '<input type="checkbox" name="document_comments_open" %s />', $document_comments_open ? ' checked="checked" ' : '' );
-	echo ' ';
-	echo __( 'Allow comments on documents', DOCUMENTATION_PLUGIN_DOMAIN );
-?>
-</label>
-<p class="description">
-<?php
-	echo __( 'Disable this option if you do not want to allow visitors to post comments on documents.', DOCUMENTATION_PLUGIN_DOMAIN );
-	echo ' ';
-	echo __( 'If this option is enabled, you may choose to allow comments on each document individually.', DOCUMENTATION_PLUGIN_DOMAIN );
-	echo ' ';
-	echo __( 'If this option is disabled, comments on all documents are disabled.', DOCUMENTATION_PLUGIN_DOMAIN );
-?>
-</p>
-<div class="separator"></div>
-<label>
-<?php
+echo '<label>';
+printf( '<input type="checkbox" name="document_comments_open" %s />', $document_comments_open ? ' checked="checked" ' : '' );
+echo ' ';
+echo __( 'Allow comments on documents', DOCUMENTATION_PLUGIN_DOMAIN );
+echo '</label>';
+echo '<p class="description">';
+echo __( 'Disable this option if you do not want to allow visitors to post comments on documents.', DOCUMENTATION_PLUGIN_DOMAIN );
+echo ' ';
+echo __( 'If this option is enabled, you may choose to allow comments on each document individually.', DOCUMENTATION_PLUGIN_DOMAIN );
+echo ' ';
+echo __( 'If this option is disabled, comments on all documents are disabled.', DOCUMENTATION_PLUGIN_DOMAIN );
+echo '</p>';
+
+echo '<div class="separator"></div>';
+
+echo '<label>';
 echo __( 'Document slug', DOCUMENTATION_PLUGIN_DOMAIN );
 echo ' ';
 printf( '<input type="text" name="document_slug" value="%s" />', esc_attr( $document_slug ) );
@@ -85,16 +74,17 @@ echo __( 'If left empty, the default <em>document</em> applies.', DOCUMENTATION_
 echo ' ';
 echo sprintf( __( 'After changing this, please visit the <a href="%s">Permalinks</a> admin section to make sure that the permalink structure is updated.', DOCUMENTATION_PLUGIN_DOMAIN ), admin_url( 'options-permalink.php' ) );
 echo '</p>';
-?>
-</label>
-<div class="separator"></div>
+echo '</label>';
 
-<?php wp_nonce_field( 'admin', 'documentation-settings', true, true ); ?>
+echo '<div class="separator"></div>';
 
-<div class="buttons">
-<input class="import button" type="submit" name="submit" value="<?php echo __( 'Save', DOCUMENTATION_PLUGIN_DOMAIN ); ?>" />
-<input type="hidden" name="action" value="set" />
-</div>
-</div>
-</form>
-</div>
+wp_nonce_field( 'admin', 'documentation-settings', true, true );
+
+echo '<div class="buttons">';
+printf( '<input class="save button button-primary" type="submit" name="submit" value="%s" />', esc_attr( __( 'Save', DOCUMENTATION_PLUGIN_DOMAIN ) ) );
+echo '<input type="hidden" name="action" value="set" />';
+echo '</div>';
+
+echo '</div>';
+echo '</form>';
+echo '</div>';
